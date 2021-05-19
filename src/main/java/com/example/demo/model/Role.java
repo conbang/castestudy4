@@ -1,14 +1,12 @@
 package com.example.demo.model;
 
+import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+
+import javax.persistence.*;
 
 @Entity
-public class UserRole implements GrantedAuthority {
-
+public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
@@ -32,6 +30,6 @@ public class UserRole implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return name;
+        return null;
     }
 }
