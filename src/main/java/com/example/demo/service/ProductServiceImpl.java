@@ -4,8 +4,10 @@ import com.example.demo.model.Category;
 import com.example.demo.model.Product;
 import com.example.demo.model.Shop;
 import com.example.demo.repository.IProductRepository;
-import com.example.demo.service.IProductService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class ProductServiceImpl implements IProductService {
@@ -17,13 +19,18 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Iterable<Product> findAllByShop(Shop shop) {
-        return productRepository.findProductsByShop(shop);
+    public Page<Product> findAll(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
     @Override
-    public Iterable<Product> findAllByCategory(Shop shop, Category category) {
-        return productRepository.findProductsByShopAndCategory(shop, category);
+    public Page<Product> findAllByShop(Shop shop, Pageable pageable) {
+        return productRepository.findProductsByShop(shop, pageable);
+    }
+
+    @Override
+    public Page<Product> findAllByCategory(Shop shop, Category category,Pageable pageable) {
+        return productRepository.findProductsByShopAndCategory(shop, category,pageable);
     }
 
     @Override

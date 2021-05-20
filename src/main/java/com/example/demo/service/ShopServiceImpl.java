@@ -18,4 +18,14 @@ public class ShopServiceImpl implements IShopService{
     public Optional<Shop> findShopById(long id) {
         return shopRepository.findById(id);
     }
+
+    @Override
+    public Shop save(Shop shop) {
+        return shopRepository.save(shop);
+    }
+
+    @Override
+    public void delete(Shop shop) {
+        shopRepository.save(shop);
+    }
 }
