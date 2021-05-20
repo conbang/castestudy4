@@ -2,10 +2,10 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
-@Table(name = "users")
 public class LoginUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,17 +13,18 @@ public class LoginUser {
 
     @Column(unique = true, nullable = false)
     private String username;
-
-    @Column(nullable = false)
+    @NotNull
     private String password;
 
     @Column(nullable = false)
-    private String fullName;
-
+    private String name;
+    private Long age;
     private String phoneNumber;
 
     @Email
     private String email;
+    private String address;
+    private boolean disable = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles",
@@ -31,18 +32,17 @@ public class LoginUser {
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles;
 
-    public LoginUser(Long id, String username, String password, String fullName, String phoneNumber, String email, Set<Role> roles) {
+    public LoginUser(Long id, String username, String password, String name, Long age, String email, String address, boolean disable, UserRole userRole) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.fullName = fullName;
-        this.phoneNumber = phoneNumber;
+        this.name = name;
+        this.age = age;
         this.email = email;
         this.roles = roles;
     }
 
     public LoginUser() {
-
     }
 
     public Long getId() {
@@ -69,12 +69,12 @@ public class LoginUser {
         this.password = password;
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPhoneNumber() {
@@ -96,8 +96,38 @@ public class LoginUser {
     public Set<Role> getRoles() {
         return roles;
     }
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isDisable() {
+        return disable;
+    }
+
+    public void setDisable(boolean disable) {
+        this.disable = disable;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", disable=" + disable +
+                ", userRole=" + roles +
+                '}';
     }
 }

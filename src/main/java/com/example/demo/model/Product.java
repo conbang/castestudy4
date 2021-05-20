@@ -2,11 +2,13 @@ package com.example.demo.model;
 
 import com.example.demo.model.Category;
 import com.example.demo.model.Shop;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.sql.Date;
+import java.util.List;
 
 @Entity
 public class Product {
@@ -27,6 +29,8 @@ public class Product {
     @NotNull
     private Long quantity;
 
+    @Transient
+    private List<MultipartFile> multipartFile;
     private String image;
 
     private Long soldNumber;
@@ -39,7 +43,10 @@ public class Product {
     public Product() {
     }
 
-    public Product(Long id, @NotEmpty String name, @NotNull Double price, String description, Date date_time, @NotNull Long quantity, String image, Category category, Shop shop) {
+    public Product(Long id, @NotEmpty String name,
+                   @NotNull Double price, String description,
+                   Date date_time, @NotNull Long quantity,
+                   String image, Category category, Shop shop) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -51,7 +58,19 @@ public class Product {
         this.shop = shop;
     }
 
-    public Product(Long id, @NotEmpty String name, @NotNull Double price, String description, Date date_time, @NotNull Long quantity, String image, Long soldNumber, Double rate, Category category) {
+    public List<MultipartFile> getMultipartFile() {
+        return multipartFile;
+    }
+
+    public void setMultipartFile(List<MultipartFile> multipartFile) {
+        this.multipartFile = multipartFile;
+    }
+
+    public Product(Long id, @NotEmpty String name,
+                   @NotNull Double price, String description,
+                   Date date_time, @NotNull Long quantity,
+                   String image, Long soldNumber,
+                   Double rate, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -150,5 +169,22 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", date_time=" + date_time +
+                ", quantity=" + quantity +
+                ", image='" + image + '\'' +
+                ", soldNumber=" + soldNumber +
+                ", rate=" + rate +
+                ", category=" + category +
+                ", shop=" + shop +
+                '}';
     }
 }

@@ -1,10 +1,11 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity
-public class BillDetail {
+public class BillDetail  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
