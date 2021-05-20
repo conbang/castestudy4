@@ -25,9 +25,9 @@ public class Product {
 
     private String description;
 
+
     private Date date_time;
-    @NotNull
-    private Long quantity;
+
 
     @Transient
     private List<MultipartFile> multipartFile;
@@ -45,14 +45,13 @@ public class Product {
 
     public Product(Long id, @NotEmpty String name,
                    @NotNull Double price, String description,
-                   Date date_time, @NotNull Long quantity,
+                   Date date_time,
                    String image, Category category, Shop shop) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.date_time = date_time;
-        this.quantity = quantity;
         this.image = image;
         this.category = category;
         this.shop = shop;
@@ -76,7 +75,6 @@ public class Product {
         this.price = price;
         this.description = description;
         this.date_time = date_time;
-        this.quantity = quantity;
         this.image = image;
         this.soldNumber = soldNumber;
         this.rate = rate;
@@ -139,13 +137,6 @@ public class Product {
         this.date_time = date_time;
     }
 
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
 
     public String getImage() {
         return image;
@@ -179,7 +170,6 @@ public class Product {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", date_time=" + date_time +
-                ", quantity=" + quantity +
                 ", image='" + image + '\'' +
                 ", soldNumber=" + soldNumber +
                 ", rate=" + rate +
