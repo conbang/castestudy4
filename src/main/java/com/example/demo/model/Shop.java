@@ -1,9 +1,10 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Shop {
+public class Shop  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -48,5 +49,15 @@ public class Shop {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "Shop{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", loginUser=" + loginUser +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

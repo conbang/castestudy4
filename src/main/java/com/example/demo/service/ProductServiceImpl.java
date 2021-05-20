@@ -5,11 +5,14 @@ import com.example.demo.model.Product;
 import com.example.demo.model.Shop;
 import com.example.demo.repository.IProductRepository;
 import com.example.demo.service.IProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements IProductService {
-
+    @Autowired
     private final IProductRepository productRepository;
 
     public ProductServiceImpl(IProductRepository productRepository) {
@@ -35,4 +38,21 @@ public class ProductServiceImpl implements IProductService {
     public void delete(Product product) {
 
     }
+
+    @Override
+    public Iterable<Product> findAll() {
+        return productRepository.findAll();
+    }
+
+    @Override
+    public Optional<Product> findById(Long id) {
+        return productRepository.findById(id);
+    }
+
+    @Override
+    public Iterable<Product> findAllByName(String string) {
+        return productRepository.findProductByNameContaining(string);
+    }
+
+
 }

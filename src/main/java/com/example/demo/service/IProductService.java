@@ -4,6 +4,8 @@ import com.example.demo.model.Category;
 import com.example.demo.model.Product;
 import com.example.demo.model.Shop;
 
+import java.util.Optional;
+
 public interface IProductService{
 
     Iterable<Product> findAllByShop(Shop shop);
@@ -13,4 +15,8 @@ public interface IProductService{
     Product save(Product product);
 
     void delete(Product product);
+    Iterable<Product> findAll();
+    Optional<Product> findById(Long id);
+    Iterable<Product> findAllByName(String string);
+
 }

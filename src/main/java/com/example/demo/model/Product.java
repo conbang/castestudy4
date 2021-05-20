@@ -2,14 +2,16 @@ package com.example.demo.model;
 
 import com.example.demo.model.Category;
 import com.example.demo.model.Shop;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.sql.Date;
 
 @Entity
-public class Product {
+public class Product  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,6 +24,7 @@ public class Product {
     private Double price;
 
     private String description;
+
 
     private Date date_time;
     @NotNull
@@ -150,5 +153,22 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                ", date_time=" + date_time +
+                ", quantity=" + quantity +
+                ", image='" + image + '\'' +
+                ", soldNumber=" + soldNumber +
+                ", rate=" + rate +
+                ", category=" + category +
+                ", shop=" + shop +
+                '}';
     }
 }
