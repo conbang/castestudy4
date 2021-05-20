@@ -1,26 +1,36 @@
 package com.example.demo.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class LoginUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    @NotNull
+    private Long id;
+
+    @Column(unique = true, nullable = false)
     private String username;
     @NotNull
     private String password;
+
+    @Column(nullable = false)
     private String name;
     private Long age;
+    private String phoneNumber;
+
+    @Email
     private String email;
     private String address;
     private boolean disable = false;
 
-    public LoginUser() {
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles;
 
     public LoginUser(Long id, String username, String password, String name, Long age, String email, String address, boolean disable, UserRole userRole) {
         this.id = id;
@@ -29,23 +39,11 @@ public class LoginUser {
         this.name = name;
         this.age = age;
         this.email = email;
-        this.address = address;
-        this.disable = disable;
-        this.userRole = userRole;
+        this.roles = roles;
     }
 
-
-    @ManyToOne
-    private UserRole userRole;
-
-    public UserRole getUserRole() {
-        return userRole;
+    public LoginUser() {
     }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
-
 
     public Long getId() {
         return id;
@@ -79,12 +77,12 @@ public class LoginUser {
         this.name = name;
     }
 
-    public Long getAge() {
-        return age;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setAge(Long age) {
-        this.age = age;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -95,12 +93,19 @@ public class LoginUser {
         this.email = email;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
     public String getAddress() {
         return address;
     }
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public boolean isDisable() {
@@ -122,8 +127,7 @@ public class LoginUser {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", disable=" + disable +
-                ", userRole=" + userRole +
+                ", userRole=" + roles +
                 '}';
     }
 }
-
