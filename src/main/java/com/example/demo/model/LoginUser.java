@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 public class LoginUser {
@@ -44,7 +45,6 @@ public class LoginUser {
     public void setUserRole(UserRole userRole) {
         this.userRole = userRole;
     }
-
 
 
     public Long getId() {
@@ -110,4 +110,20 @@ public class LoginUser {
     public void setDisable(boolean disable) {
         this.disable = disable;
     }
+
+    @Override
+    public String toString() {
+        return "LoginUser{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", disable=" + disable +
+                ", userRole=" + userRole +
+                '}';
+    }
 }
+

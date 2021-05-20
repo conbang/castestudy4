@@ -14,4 +14,8 @@ public interface IProductRepository extends PagingAndSortingRepository<Product, 
     Page<Product> findProductsByShop(Shop shop, Pageable pageable);
 
     Page<Product> findProductsByShopAndCategory(Shop shop, Category category,Pageable pageable);
+    Iterable<Product> findProductsByShopAndCategory(Shop shop, Category category);
+
+    Iterable<Product> findProductByNameContaining(String string);
+
 }

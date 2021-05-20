@@ -6,7 +6,9 @@ import com.example.demo.model.Shop;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-public interface IProductService {
+import java.util.Optional;
+
+public interface IProductService{
 
     Page<Product> findAll(Pageable pageable);
 
@@ -17,4 +19,8 @@ public interface IProductService {
     Product save(Product product);
 
     void delete(Product product);
+    Iterable<Product> findAll();
+    Optional<Product> findById(Long id);
+    Iterable<Product> findAllByName(String string);
+
 }

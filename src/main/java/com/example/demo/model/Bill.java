@@ -4,6 +4,7 @@ import com.example.demo.model.LoginUser;
 import com.example.demo.model.Shop;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 
