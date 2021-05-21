@@ -1,7 +1,7 @@
 package com.example.demo.config;
 
 
-import com.example.demo.service.appUserService.appUser.IUserService;
+import com.example.demo.service.appUserService.appUser.AppUserService;
 import com.example.demo.service.jwtService.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,7 +21,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private JwtService jwtService;
 
     @Autowired
-    private IUserService userService;
+    private AppUserService userService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,

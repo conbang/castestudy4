@@ -1,7 +1,7 @@
 package com.example.demo.config;
 
 
-import com.example.demo.service.appUserService.appUser.IUserService;
+import com.example.demo.service.appUserService.appUser.AppUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,7 +27,7 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtAuthEntryPoint jwtAuthEntryPoint;
     @Autowired
-    private IUserService appUserService;
+    private AppUserService appUserService;
 
     @Autowired
     private LoginSuccessHandle loginSuccessHandler;
@@ -41,18 +41,15 @@ public class AppSecurityConfig extends WebSecurityConfigurerAdapter {
     //phan quyen theo tung tai khoan
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/home/**").permitAll()
-                .antMatchers("/api/login").permitAll()
-                .antMatchers("/api/v1/logot").permitAll()
-                .antMatchers("/api/v1/currentUser").permitAll()
+        http.authorizeRequests().antMatchers("/home/**","/admin/**").permitAll()
+//                .and()
+//                .authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
-                .authorizeRequests().antMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                .authorizeRequests().antMatchers("/users/**").hasRole("USER")
                 .and()
-                .authorizeRequests().antMatchers("/api/v1/users/**").hasRole("USER")
+                .authorizeRequests().antMatchers("/shop/**").hasRole("SHOP")
                 .and()
-                .authorizeRequests().antMatchers("/api/v1/shop/**").hasRole("SHOP")
-                .and()
-                .authorizeRequests().antMatchers("/api/v1/cart/GetCart").hasAnyRole("USER")
+                .authorizeRequests().antMatchers("/cart/GetCart").hasAnyRole("SHOP","USER")
                 .and()
                 .formLogin()
                 .and()
